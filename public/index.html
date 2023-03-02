@@ -33,8 +33,8 @@
   let gyroDate;
   let accelerometer = new Accelerometer({ frequency: 200 });
   let accelDate;
-  let gyroRec;
-  let accelRec;
+  let gyroRec = new String();
+  let accelRec = new String();
 
   gyroscope.addEventListener("reading", (e) => {
     document.getElementById("gyroX").innerHTML = `Angular velocity along the X-axis ${gyroscope.x.toFixed(5)}`;
