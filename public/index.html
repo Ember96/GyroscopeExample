@@ -35,7 +35,7 @@
     document.getElementById("gyroY").innerHTML = `Angular velocity along the Y-axis ${gyroscope.y.toFixed(5)}`;
     document.getElementById("gyroZ").innerHTML = `Angular velocity along the Z-axis ${gyroscope.z.toFixed(5)}`;
     gyroDate = new Date();
-    document.getElementById("gyroTimestamp").innerHTML = `Timestamp: ${(gyroDate.getUTCMilliseconds()/60).toFixed(3)}`;
+    document.getElementById("gyroTimestamp").innerHTML = `Timestamp: ${gyroDate.getUTCSeconds().toFixed(3)}`;
   });
   let accelerometer = new Accelerometer({ frequency: 200 });
   let accelDate;
@@ -45,7 +45,7 @@
     document.getElementById("accelY").innerHTML = `3D position in the Y-axis ${accelerometer.y.toFixed(5)}`;
     document.getElementById("accelZ").innerHTML = `3D position in the Z-axis ${accelerometer.z.toFixed(5)}`;
     accelDate = new Date();
-    document.getElementById("accelTimestamp").innerHTML = `Timestamp: ${(accelDate.getUTCMilliseconds()/60).toFixed(3)}`;
+    document.getElementById("accelTimestamp").innerHTML = `Timestamp: ${accelDate.getUTCSeconds().toFixed(3)}`;
   });
   function gyroStart() {
     gyroscope.start();
