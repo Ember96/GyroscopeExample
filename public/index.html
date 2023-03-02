@@ -40,24 +40,24 @@
   let accelerometer = new Accelerometer({ frequency: 200 });
   let accelDate;
 
-  gyroscope.addEventListener("reading", (e) => {
+  accelerometer.addEventListener("reading", (e) => {
     document.getElementById("accelX").innerHTML = `3D position in the X-axis ${accelerometer.x}`;
     document.getElementById("accelY").innerHTML = `3D position in the Y-axis ${accelerometer.y}`;
     document.getElementById("accelZ").innerHTML = `3D position in the Z-axis ${accelerometer.z}`;
     date = new Date();
-    document.getElementById("gyroTimestamp").innerHTML = `Timestamp: ${accelDate.getUTCMilliseconds()/60}`;
+    document.getElementById("accelTimestamp").innerHTML = `Timestamp: ${accelDate.getUTCMilliseconds()/60}`;
   });
   function gyroStart() {
     gyroscope.start();
   }
   function gyroStop() {
-    gyroscope.start();
+    gyroscope.stop();
   }
   function accelStart() {
     accelerometer.start();
   }
   function accelStop() {
-    accelerometer.start();
+    accelerometer.stop();
   }
 </script>
 </body>
