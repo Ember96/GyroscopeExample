@@ -1,32 +1,64 @@
 <html>
 
 <head>
-  <title>Express</title>
+  <title>Gyroscope and Accelerometer</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-  <h1>Express</h1>
+  <h1>Gyroscope</h1>
   <p id="gyroX">Welcome to Express</p>
   <p id="gyroY"></p>
   <p id="gyroZ"></p>
-  <p id="timestamp"></p>
+  <p id="gyroTimestamp"></p>
+  <div>
+    <button onclick="gyroStart()">Start Gyroscope</button>
+    <button onclick="gyroStop()">Stop Gyroscope</button>
+  </div>
+  <br>
+  <h1>Accelerometer</h1>
+  <p id="accelX">Welcome to Express</p>
+  <p id="accelY"></p>
+  <p id="accelZ"></p>
+  <p id="accelTimestamp"></p>
+  <div>
+    <button onclick="accelStart()">Start Accelerometer</button>
+    <button onclick="accelStop()">Stop Accelerometer</button>
+  </div>
+
 <script>
-  let gyroscope = new Gyroscope({ frequency: 60 });
-  let date;
+  let gyroscope = new Gyroscope({ frequency: 200 });
+  let gyroDate;
 
   gyroscope.addEventListener("reading", (e) => {
-    console.log(`Angular velocity along the X-axis ${gyroscope.x}`);
-    console.log(`Angular velocity along the Y-axis ${gyroscope.y}`);
-    console.log(`Angular velocity along the Z-axis ${gyroscope.z}`);
     document.getElementById("gyroX").innerHTML = `Angular velocity along the X-axis ${gyroscope.x}`;
     document.getElementById("gyroY").innerHTML = `Angular velocity along the Y-axis ${gyroscope.y}`;
     document.getElementById("gyroZ").innerHTML = `Angular velocity along the Z-axis ${gyroscope.z}`;
     date = new Date();
-    document.getElementById("timestamp").innerHTML = `Timestamp: ${date.getUTCMilliseconds()}`;
+    document.getElementById("gyroTimestamp").innerHTML = `Timestamp: ${gyroDate.getUTCMilliseconds()/60}`;
   });
-  gyroscope.start();
+  let accelerometer = new Accelerometer({ frequency: 200 });
+  let accelDate;
 
+  gyroscope.addEventListener("reading", (e) => {
+    document.getElementById("accelX").innerHTML = `3D position in the X-axis ${accelerometer.x}`;
+    document.getElementById("accelY").innerHTML = `3D position in the Y-axis ${accelerometer.y}`;
+    document.getElementById("accelZ").innerHTML = `3D position in the Z-axis ${accelerometer.z}`;
+    date = new Date();
+    document.getElementById("gyroTimestamp").innerHTML = `Timestamp: ${accelDate.getUTCMilliseconds()/60}`;
+  });
+  function gyroStart() {
+    gyroscope.start();
+  }
+  function gyroStop() {
+    gyroscope.start();
+  }
+  function accelStart() {
+    gyroscope.start();
+  }
+  function accelStop() {
+    gyroscope.start();
+  }
 </script>
 </body>
 
