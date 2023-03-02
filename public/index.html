@@ -13,6 +13,8 @@
   <p id="timestamp"></p>
 <script>
   let gyroscope = new Gyroscope({ frequency: 60 });
+  let date = new Date();
+
   gyroscope.addEventListener("reading", (e) => {
     console.log(`Angular velocity along the X-axis ${gyroscope.x}`);
     console.log(`Angular velocity along the Y-axis ${gyroscope.y}`);
@@ -20,7 +22,7 @@
     document.getElementById("gyroX").innerHTML = `Angular velocity along the X-axis ${gyroscope.x}`;
     document.getElementById("gyroY").innerHTML = `Angular velocity along the Y-axis ${gyroscope.y}`;
     document.getElementById("gyroZ").innerHTML = `Angular velocity along the Z-axis ${gyroscope.z}`;
-    document.getElementById("timestamp").innerHTML = `Timestamp: ${Math.floor(Date.now()/216000000)}`;
+    document.getElementById("timestamp").innerHTML = `Timestamp: ${date.getUTCMilliseconds()}`;
   });
   gyroscope.start();
 
