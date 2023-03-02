@@ -14,6 +14,7 @@
   <div>
     <button onclick="gyroStart()">Start Gyroscope</button>
     <button onclick="gyroStop()">Stop Gyroscope</button>
+    <button onclick="downloadGyroRec()">Download CSV</button>
   </div>
   <br>
   <h1>Accelerometer</h1>
@@ -24,11 +25,16 @@
   <div>
     <button onclick="accelStart()">Start Accelerometer</button>
     <button onclick="accelStop()">Stop Accelerometer</button>
+    <button onclick="downloadAccelRec()">Download CSV</button>
   </div>
 
 <script>
   let gyroscope = new Gyroscope({ frequency: 200 });
   let gyroDate;
+  let accelerometer = new Accelerometer({ frequency: 200 });
+  let accelDate;
+  let gyroRec;
+  let accelRec;
 
   gyroscope.addEventListener("reading", (e) => {
     document.getElementById("gyroX").innerHTML = `Angular velocity along the X-axis ${gyroscope.x.toFixed(5)}`;
@@ -36,9 +42,9 @@
     document.getElementById("gyroZ").innerHTML = `Angular velocity along the Z-axis ${gyroscope.z.toFixed(5)}`;
     gyroDate = new Date();
     document.getElementById("gyroTimestamp").innerHTML = `Timestamp: ${gyroDate.getMilliseconds().toFixed(3)}`;
+    gyroRec += gyroscope.x.toFixed(5) + "," + gyroscope.y.toFixed(5) + "," + gyroscope.z.toFixed(5) + "," + gyroDate.getMilliseconds().toFixed(3);
+    gyroRec += "\n";
   });
-  let accelerometer = new Accelerometer({ frequency: 200 });
-  let accelDate;
 
   accelerometer.addEventListener("reading", (e) => {
     document.getElementById("accelX").innerHTML = `3D position in the X-axis ${accelerometer.x.toFixed(5)}`;
@@ -46,6 +52,8 @@
     document.getElementById("accelZ").innerHTML = `3D position in the Z-axis ${accelerometer.z.toFixed(5)}`;
     accelDate = new Date();
     document.getElementById("accelTimestamp").innerHTML = `Timestamp: ${accelDate.getMilliseconds().toFixed(3)}`;
+    accelRec += accelerometer.x.toFixed(5) + "," + accelerometer.y.toFixed(5) + "," + accelerometer.z.toFixed(5) + "," + accelDate.getMilliseconds().toFixed(3);
+    accelRec += "\n";
   });
   function gyroStart() {
     gyroscope.start();
@@ -58,6 +66,22 @@
   }
   function accelStop() {
     accelerometer.stop();
+  }
+  
+  function downloadGyroRec() {
+    let hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(gyroRec);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'Gyroscope Record.csv';
+    hiddenElement.click();
+  }
+
+  function downloadAccelRec() {
+    let hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(accelRec);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'Accelerometer Record.csv';
+    hiddenElement.click();
   }
 </script>
 </body>
