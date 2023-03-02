@@ -9,17 +9,14 @@
   <h1>Express</h1>
   <p id="gyro">Welcome to Express</p>
 <script>
-  alert("hello");
   let gyroscope = new Gyroscope({ frequency: 60 });
-  alert("gyro")
   gyroscope.addEventListener("reading", (e) => {
-    alert("reading");
     console.log(`Angular velocity along the X-axis ${gyroscope.x}`);
     console.log(`Angular velocity along the Y-axis ${gyroscope.y}`);
     console.log(`Angular velocity along the Z-axis ${gyroscope.z}`);
-    document.getElementById("gyro").innerHTML = `Angular velocity along the X-axis ${gyroscope.x}`;
-    alert(`Angular velocity along the Z-axis ${gyroscope.z}`);
-    alert(`Angular velocity along the X-axis ${gyroscope.x}`);
+    document.getElementById("gyro").innerHTML = `Angular velocity along the X-axis ${gyroscope.x} \n
+                                                 Angular velocity along the Y-axis ${gyroscope.y} \n
+                                                 Angular velocity along the Z-axis ${gyroscope.z}`;
   });
   gyroscope.start();
 
