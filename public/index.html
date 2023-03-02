@@ -9,30 +9,18 @@
   <h1>Express</h1>
   <p id="gyro">Welcome to Express</p>
 <script>
-  let accelerometer = null;
-  try {
-    accelerometer = new Accelerometer({ referenceFrame: 'device' });
-    accelerometer.addEventListener('error', (event) => {
-      // Handle runtime errors.
-      if (event.error.name === 'NotAllowedError') {
-        // Branch to code for requesting permission.
-      } else if (event.error.name === 'NotReadableError' ) {
-        console.log('Cannot connect to the sensor.');
-      }
-    });
-    accelerometer.addEventListener('reading', () => reloadOnShake(accelerometer));
-    accelerometer.start();
-  } catch (error) {
-    // Handle construction errors.
-    if (error.name === 'SecurityError') {
-      // See the note above about permissions policy.
-      alert('Sensor construction was blocked by a permissions policy.');
-    } else if (error.name === 'ReferenceError') {
-      alert('Sensor is not supported by the User Agent.');
-    } else {
-      throw error;
-    }
-  }
+  alert("hello");
+  let gyroscope = new Gyroscope({ frequency: 60 });
+  alert("gyro")
+  gyroscope.addEventListener("reading", (e) => {
+    alert("reading");
+    console.log(`Angular velocity along the X-axis ${gyroscope.x}`);
+    console.log(`Angular velocity along the Y-axis ${gyroscope.y}`);
+    console.log(`Angular velocity along the Z-axis ${gyroscope.z}`);
+    document.getElementById("gyro").innerHTML = `Angular velocity along the X-axis ${gyroscope.x}`;
+    alert(`Angular velocity along the Z-axis ${gyroscope.z}`);
+  });
+  gyroscope.start();
 
 </script>
 </body>
